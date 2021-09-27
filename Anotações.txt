@@ -1,0 +1,22 @@
+TABELAS
+usuarios - id, nome, usuario, senha, nivel OK
+locais - id, nome, data_cadastro OK
+convenios - id, nome, data_cadastro OK
+especialidades - id, nome, data_cadastro OK 	
+medicos - id, nome, crm, especialidade fk, data_cadastro OK
+tipo_exames - id, sigla, descricao OK
+pacientes - id, nome, idade, telefone OK
+tipo_genericos - id, sigla, descricao OK
+
+exames - id, tipo fk, numero, paciente fk, medico fk, convenio fk, data_entrada, envio fk, entrega fk
+genericos - id, tipo fk, descricao, data_entrada
+envio_material - id, codigo, status, data_previsao, data_envio
+entrega_material - id, codigo, local fk, status, data_entrega
+
+
+FAZER VALIDAÇÕES NOS CAMPOS
+
+VERIFICAR DELEÇÃO DE DADOS QUE CONTENHAM DEPENDENCIA EXEMPLO ESPECIALIDADE EM MÉDICO
+
+
+TERMINAR CADASTRO DE EXAMES
