@@ -22,13 +22,13 @@ namespace Protocolo.Controller
                     SqlCommand query = new SqlCommand();
                     query.CommandType = CommandType.Text;
                     con.Open();
-                    query.CommandText = "INSERT INTO exames ([tipo],[numero],[paciente],[medico],[convenio],[data_entrada]) VALUES (@tipo,@numero,@paciente,@medico,@convenio,@data_entrada])";
+                    query.CommandText = "INSERT INTO exames ([tipo],[numero],[paciente],[medico],[convenio],[data_entrada]) VALUES (@tipo,@numero,@paciente,@medico,@convenio,@data_entrada)";
                     query.Parameters.Add("tipo", SqlDbType.Int).Value = obj.Tipo;
                     query.Parameters.Add("numero", SqlDbType.Int).Value = obj.Numero;
                     query.Parameters.Add("paciente", SqlDbType.Int).Value = obj.Paciente;
                     query.Parameters.Add("medico", SqlDbType.Int).Value = obj.Medico;
                     query.Parameters.Add("convenio", SqlDbType.Int).Value = obj.Convenio;
-                    query.Parameters.Add("data_entrada", SqlDbType.DateTime).Value = obj.Data_entrada;
+                    query.Parameters.Add("data_entrada", SqlDbType.VarChar).Value = obj.Data_entrada;
                     //VERIFICAR SE EXAME JÁ EXISTE NO BANCO
                     SqlCommand queryVerifica = new SqlCommand();
                     queryVerifica.CommandType = CommandType.Text;
@@ -53,6 +53,7 @@ namespace Protocolo.Controller
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return retorno = -1;
             }
         }
@@ -244,7 +245,7 @@ namespace Protocolo.Controller
                         "inner join pacientes as p on e.paciente = p.id " +
                         "inner join medicos as m on e.medico = m.id " +
                         "inner join convenios as c on e.convenio = c.id " +
-                        "WHERE e.data_entrada BETWEEN @data_inicio AND @data_fim ORDER BY p.nome ASC";
+                        "WHERE e.data_entrada BETWEEN @data_inicio AND @data_fim ORDER BY e.data_entrada ASC";
                     query.Parameters.Add("data_inicio", SqlDbType.VarChar).Value = data_inicio;
                     query.Parameters.Add("data_fim", SqlDbType.VarChar).Value = data_fim;
                     query.Connection = con;

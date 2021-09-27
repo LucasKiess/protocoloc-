@@ -61,7 +61,10 @@ namespace Protocolo.View.Crud
 
         private void frmExamesCrud_Load(object sender, EventArgs e)
         {
-            CarregarComboBoxTipoExames();
+            if (txtTipo.Text.Trim() == "")
+            {
+                CarregarComboBoxTipoExames();
+            }
             CarregarComboBoxConvenio();
         }
 
@@ -85,11 +88,48 @@ namespace Protocolo.View.Crud
             }
         }
 
-       
-
-        private void cbTipo_TextChanged(object sender, EventArgs e)
+        private void LimparCampos()
         {
-            
+            lblIdPaciente.Text = ".......";
+            txtNomePaciente.Text = "";
+            txtIdadePaciente.Text = "";
+            txtTelefonePaciente.Text = "";
+            txtTipo.Text = "";
+            txtNumero.Text = "";
+            txtCrm.Text = "";
+            txtIdMedico.Text = "";
+            txtNomeMedico.Text = "";
+
+        }
+        private void CadastrarExame()
+        {
+            obj.Tipo = Convert.ToInt32(cbTipo.SelectedValue);
+            obj.Numero = Convert.ToInt32(txtNumero.Text);
+            obj.Paciente = Convert.ToInt32(lblIdPaciente.Text);
+            obj.Medico = Convert.ToInt32(txtIdMedico.Text);
+            obj.Convenio = Convert.ToInt32(cbConvenio.SelectedValue);
+            obj.Data_entrada = data.Text;
+
+            int retorno = ExamesMod.CadastrarExame(obj);
+            if (retorno == 0)
+            {
+                MessageBox.Show("Exame já cadastrado com esse número!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNumero.Text = "";
+                txtNumero.Focus();
+                return;
+            }
+            if (retorno > 0)
+            {
+                MessageBox.Show("Exame inserido!", "Êxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimparCampos();
+                frmExamesView frm = new frmExamesView();
+                this.Hide();
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Erro ao inserir exame!", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtCrm_KeyDown(object sender, KeyEventArgs e)
@@ -107,7 +147,7 @@ namespace Protocolo.View.Crud
             Program.idadePaciente = txtIdadePaciente.Text;
             Program.telefonePaciente = txtTelefonePaciente.Text;
             Program.tipoExame = txtTipo.Text;
-            Program.cbExame = cbTipo.Text;
+            Program.cbExame = cbTipo.SelectedItem.ToString();
             Program.numExame = txtNumero.Text;
             frmMedicosView frm = new frmMedicosView();
             this.Hide();
@@ -121,6 +161,26 @@ namespace Protocolo.View.Crud
         {
             frmExamesView frm = new frmExamesView();
             frm.Show();
+        }
+
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if(txtNumero.Text.Trim() == "")
+            {
+                MessageBox.Show("Preencha o campo número", "Campo vazio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNumero.Text = "";
+                txtNumero.Focus();
+                return;
+            }
+            if (txtCrm.Text.Trim() == "" || txtIdMedico.Text.Trim() == "" || txtNomeMedico.Text.Trim() == "")
+            {
+                MessageBox.Show("Selecione o médico", "Campo vazio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCrm.Text = "";
+                txtCrm.Focus();
+                return;
+            }
+            CadastrarExame();
         }
     }
 }

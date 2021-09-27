@@ -73,6 +73,7 @@ namespace Protocolo.View.Crud
             this.btnSalvar.TabIndex = 50;
             this.btnSalvar.Text = "REGISTRAR EXAME";
             this.btnSalvar.UseVisualStyleBackColor = false;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // data
             // 
@@ -107,7 +108,7 @@ namespace Protocolo.View.Crud
             this.cbConvenio.Location = new System.Drawing.Point(73, 163);
             this.cbConvenio.Name = "cbConvenio";
             this.cbConvenio.Size = new System.Drawing.Size(159, 21);
-            this.cbConvenio.TabIndex = 46;
+            this.cbConvenio.TabIndex = 4;
             // 
             // label13
             // 
@@ -165,7 +166,7 @@ namespace Protocolo.View.Crud
             this.txtCrm.Location = new System.Drawing.Point(73, 91);
             this.txtCrm.Name = "txtCrm";
             this.txtCrm.Size = new System.Drawing.Size(73, 20);
-            this.txtCrm.TabIndex = 40;
+            this.txtCrm.TabIndex = 3;
             this.txtCrm.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCrm_KeyDown);
             // 
             // label15
@@ -191,7 +192,7 @@ namespace Protocolo.View.Crud
             this.txtNumero.Location = new System.Drawing.Point(309, 44);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(73, 20);
-            this.txtNumero.TabIndex = 37;
+            this.txtNumero.TabIndex = 2;
             // 
             // cbTipo
             // 
@@ -201,7 +202,6 @@ namespace Protocolo.View.Crud
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(159, 21);
             this.cbTipo.TabIndex = 36;
-            this.cbTipo.TextChanged += new System.EventHandler(this.cbTipo_TextChanged);
             // 
             // label17
             // 
@@ -219,7 +219,7 @@ namespace Protocolo.View.Crud
             this.txtTipo.MaxLength = 1;
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(24, 20);
-            this.txtTipo.TabIndex = 34;
+            this.txtTipo.TabIndex = 1;
             this.txtTipo.TextChanged += new System.EventHandler(this.txtTipo_TextChanged);
             // 
             // txtTelefonePaciente
